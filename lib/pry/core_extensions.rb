@@ -38,7 +38,8 @@ class Object
   #   end
   #   my_method()
   # @see Pry.start
-  def pry(object=nil, hash={})
+  def pry(object=nil, hash={}, &condition)
+    return unless yield if block_given?
     if object.nil? || Hash === object
       Pry.start(self, object || {})
     else
